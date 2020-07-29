@@ -62,7 +62,10 @@ void Queue::worker(void)
       ;
     
     if (quit)
+    {
+      lock.clear(std::memory_order_release);
       return;
+    }
 
     if (q.size())
     {
