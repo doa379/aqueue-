@@ -2,16 +2,16 @@
   $ g++ test_lfqueue.cpp -L $PWD -l lfqueue++ -Wl,-rpath,$PWD -o test_lfqueue && ./test_lfqueue
 */
 
-#include <iostream>
+#include <cstdio>
 #include <cstdlib>
 #include <unistd.h>
 #include "lfqueue.hpp"
 
 void func_cb(const int *v)
 {
-  std::cout << *v << std::endl;
+  printf("\nThis is job %d", *v);
   sleep(5);
-  std::cout << "Job exit" << std::endl;
+  printf("\nJob %d exit", *v);
 }
 
 int main()
@@ -29,12 +29,12 @@ int main()
   for (std::vector<int>::iterator v = V.begin(); v < V.end(); v++)
   {
     queue.enqueue([v]() { func_cb(&*v); });
-    std::cout << "Data " << *v << "job added" << std::endl;
+    printf("Data %d...job added\n", *v);
   }
 
   while (queue.count_queue())
   {
-    std::cout << queue.count_queue() << " jobs remaining" << std::endl;
+    printf("\r%ld job(s) remaining", queue.count_queue());
     sleep(1);
   }
 

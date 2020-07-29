@@ -15,7 +15,7 @@ class Queue
   std::queue<std::function<void()>> q;
   //std::mutex q_mtx;
   //std::condition_variable cv;
-  std::atomic_flag lock;
+  std::atomic_flag lock = ATOMIC_FLAG_INIT;
   bool quit;
 
 public:

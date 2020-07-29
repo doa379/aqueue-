@@ -4,7 +4,7 @@ Queue::Queue(void)
 {
   quit = 0;
   //lock.atomic_flag_clear_explicit(memory_order_relaxed);
-  lock.clear(std::memory_order_release);
+  //lock.clear(std::memory_order_release);
   th = new std::thread(&Queue::worker, this);
 }
 
@@ -57,20 +57,26 @@ void Queue::worker(void)
       std::lock_guard<std::mutex> lock(q_mtx);
       q.pop();
     }
-    */
-    while (!q.size() && lock.test_and_set(std::memory_order_acquire) && !quit)
+*/    
+    while (lock.test_and_set(std::memory_order_acquire))
       ;
     
     if (quit)
       return;
 
-    curr_job = q.front();
-    lock.clear(std::memory_order_release);
-    
-    while (lock.test_and_set(std::memory_order_acquire))
-      ;
-    q.pop();
-    lock.clear(std::memory_order_release);
+    if (q.size())
+    {
+      curr_job = q.front();
+      lock.clear(std::memory_order_release);
+      curr_job(); 
+      while (lock.test_and_set(std::memory_order_acquire))
+        ;
+      q.pop();
+      lock.clear(std::memory_order_release);
+    }
+
+    else
+      lock.clear(std::memory_order_release);
   }
 }
 
