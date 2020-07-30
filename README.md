@@ -1,3 +1,3 @@
 # aqueue++
 
-A threaded queue system using atomic locking.
+A threaded (mpsc) queue system using atomic ordering.

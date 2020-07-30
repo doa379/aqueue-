@@ -17,9 +17,9 @@ class Queue
 public:
   Queue(void);
   ~Queue(void);
-  void clear_queue(void);
+  void clear(void);
   void enqueue(std::function<void()>);
-  size_t count_queue(void);
+  size_t count(void);
 };
 
 #endif

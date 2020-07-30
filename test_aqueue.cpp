@@ -35,9 +35,9 @@ int main()
     printf("Data %d...job added\n", *v);
   }
 
-  while (queue.count_queue())
+  while (queue.count())
   {
-    printf("\r%ld job(s) remaining", queue.count_queue());
+    printf("\r%ld job(s) remaining", queue.count());
   }
 
   printf("\n%d job(s) processed\n", processed_count);
