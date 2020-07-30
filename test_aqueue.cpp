@@ -1,11 +1,11 @@
 /*
-  $ g++ test_lfqueue.cpp -L $PWD -l lfqueue++ -Wl,-rpath,$PWD -o test_lfqueue && ./test_lfqueue
+  $ g++ test_aqueue.cpp -L $PWD -l aqueue++ -Wl,-rpath,$PWD -o test_aqueue && ./test_aqueue
 */
 
 #include <cstdio>
 #include <cstdlib>
 #include <unistd.h>
-#include "lfqueue.hpp"
+#include "aqueue.hpp"
 
 void func_cb(const int *v)
 {

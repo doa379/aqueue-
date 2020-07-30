@@ -1,10 +1,8 @@
-#ifndef LFQUEUE_HPP
-#define LFQUEUE_HPP
+#ifndef AQUEUE_HPP
+#define AQUEUE_HPP
 
 #include <thread>
 #include <queue>
-//#include <mutex>
-//#include <condition_variable>
 #include <functional>
 #include <atomic>
 
@@ -13,8 +11,6 @@ class Queue
   std::thread *th;
   void worker(void);
   std::queue<std::function<void()>> q;
-  //std::mutex q_mtx;
-  //std::condition_variable cv;
   std::atomic_flag lock = ATOMIC_FLAG_INIT;
   bool quit;
 
