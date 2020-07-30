@@ -22,7 +22,7 @@ libaqueue++.so: ${OBJ_LIBQUEUE}
 		@echo CC -o $@
 		@${CC} -shared -o $@ ${OBJ_LIBQUEUE} ${LDFLAGS}
 
-test_lfqueue: ${OBJ_TEST}
+test_aqueue: ${OBJ_TEST}
 		@echo CC -o $@
 		@${CC} -o $@ ${OBJ_TEST} ${LDFLAGS} -L $(CURDIR) -l aqueue++ -Wl,-rpath,$(CURDIR)
 
