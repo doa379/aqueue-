@@ -36,8 +36,6 @@ void Queue::clear_queue(void)
 
 void Queue::worker(void)
 {  
-  std::function<void()> curr_job;
-
   while (1)
   {
     /*
@@ -69,7 +67,7 @@ void Queue::worker(void)
 
     if (q.size())
     {
-      curr_job = q.front();
+      std::function<void()> curr_job = q.front();
       lock.clear(std::memory_order_release);
       curr_job(); 
       while (lock.test_and_set(std::memory_order_acquire))

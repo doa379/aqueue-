@@ -1,3 +1,3 @@
 # lfqueue-
 
-A Lock-free queue for use in threaded systems.
+A threaded queue system using atomic locking.
