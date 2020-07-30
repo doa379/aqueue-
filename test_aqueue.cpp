@@ -12,7 +12,7 @@ static unsigned processed_count;
 void func_cb(const int *v)
 {
   printf("\nThis is job %d", *v);
-  std::this_thread::sleep_for(std::chrono::microseconds(10));
+  std::this_thread::sleep_for(std::chrono::milliseconds(100));
   printf("\nJob %d exit", *v);
   processed_count++;
 }
@@ -23,7 +23,7 @@ int main()
   srand(0);
   std::vector<int> V;
 
-  for (unsigned i = 0; i < 10000; i++)
+  for (unsigned i = 0; i < 1000; i++)
   {
     int v = rand() % 100;
     V.emplace_back(std::move(v));
@@ -38,7 +38,6 @@ int main()
   while (queue.count_queue())
   {
     printf("\r%ld job(s) remaining", queue.count_queue());
-    //sleep(1);
   }
 
   printf("\n%d job(s) processed\n", processed_count);
